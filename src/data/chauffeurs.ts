@@ -19,7 +19,7 @@ export const chauffeurs: Chauffeur[] = [
         languages: ["English", "French"],
         specialties: ["Corporate Travel", "Airport Transfers"],
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1544168190-79c17527004f?w=600&h=800&fit=crop",
+        image: "/images/chauffeurs/c-1.jpg",
         bio: "Ex-military driver with extensive training in defensive driving and executive protection."
     },
     {
@@ -30,7 +30,7 @@ export const chauffeurs: Chauffeur[] = [
         languages: ["English", "German", "Spanish"],
         specialties: ["VIP Concierge", "City Tours"],
         rating: 4.8,
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop",
+        image: "/images/chauffeurs/c-2.jpg",
         bio: "Multilingual specialist focused on providing a bespoke concierge experience for international clients."
     },
     {
@@ -41,7 +41,7 @@ export const chauffeurs: Chauffeur[] = [
         languages: ["English", "Italian"],
         specialties: ["Wedding Services", "High-Profile Events"],
         rating: 5.0,
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop",
+        image: "/images/chauffeurs/c-3.jpg",
         bio: "Specializes in high-protocol events and luxury weddings, ensuring every detail of the journey is perfect."
     },
     {
@@ -52,7 +52,7 @@ export const chauffeurs: Chauffeur[] = [
         languages: ["English", "Mandarin", "Cantonese"],
         specialties: ["Private Tours", "Family Concierge"],
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop",
+        image: "/images/chauffeurs/c-4.jpg",
         bio: "Expert in luxury city tours and long-term private client service with a deep knowledge of major global hubs."
     }
 ];

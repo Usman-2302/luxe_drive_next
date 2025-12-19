@@ -21,7 +21,7 @@ export const services: Service[] = [
       "Complimentary wait time",
       "Luggage assistance"
     ],
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop"
+    image: "/images/services/airport.jpg"
   },
   {
     id: "hotel-transfers",
@@ -34,7 +34,7 @@ export const services: Service[] = [
       "Concierge coordination",
       "24/7 availability"
     ],
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop"
+    image: "/images/services/hotel.jpg"
   },
   {
     id: "corporate-travel",
@@ -47,7 +47,7 @@ export const services: Service[] = [
       "Onboard WiFi & charging",
       "Discretion guaranteed"
     ],
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
+    image: "/images/services/corporate.jpg"
   },
   {
     id: "wedding-services",
@@ -60,7 +60,7 @@ export const services: Service[] = [
       "Champagne on request",
       "Photography stops"
     ],
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop"
+    image: "/images/services/wedding.jpg"
   },
   {
     id: "city-tours",
@@ -73,6 +73,6 @@ export const services: Service[] = [
       "Flexible scheduling",
       "Multi-city options"
     ],
-    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+    image: "/images/services/city-tour.jpg"
   }
 ];

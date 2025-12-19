@@ -3,16 +3,21 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function ChauffeurHero() {
     return (
         <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
             {/* Background Image with Parallax-like feel */}
             <div className="absolute inset-0 z-0">
-                <img
-                    src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1920&h=1080&fit=crop"
-                    alt="Elite Chauffeurs background"
-                    className="w-full h-full object-cover"
+                <Image
+                    src="/images/chauffeurs/c-5.jpg"
+                    alt="Professional chauffeur service"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="100vw"
+                    quality={90}
                 />
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
             </div>

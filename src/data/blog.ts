@@ -15,7 +15,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Discover how successful executives transform travel time into productive hours with the right approach to luxury transportation.",
     category: "Business Travel",
     date: "2024-01-15",
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=500&fit=crop",
+    image: "/images/services/corporate.jpg",
     readTime: "5 min"
   },
   {
@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "From timing your pickup to maximizing comfort, learn the insider tips that make airport transfers seamless and stress-free.",
     category: "Travel Tips",
     date: "2024-01-10",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=500&fit=crop",
+    image: "/images/services/airport.jpg",
     readTime: "4 min"
   },
   {
@@ -33,7 +33,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Explore the latest additions to our premium fleet, featuring cutting-edge technology and unparalleled comfort.",
     category: "Fleet News",
     date: "2024-01-05",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&h=500&fit=crop",
+    image: "/images/fleet/fleet-1.jpg",
     readTime: "6 min"
   }
 ];

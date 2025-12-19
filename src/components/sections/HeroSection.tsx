@@ -10,16 +10,17 @@ import { useCounter } from "@/hooks/useCounter";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const heroImages = [
-    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1600&q=80&fm=webp&fit=crop",
-    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=80&fm=webp&fit=crop",
-    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80&fm=webp&fit=crop",
+    "/images/hero/hero-1.jpg",
+    "/images/hero/hero-2.jpg",
+    "/images/hero/hero-5.jpg",
+    "/images/hero/hero-4.jpg",
 ];
 
 const editorialImages = [
-    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80&fm=webp&fit=crop", // Exterior
-    "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&q=80&fm=webp&fit=crop", // Interior
-    "https://images.unsplash.com/photo-1617469767053-d3b508a0d182?w=1200&q=80&fm=webp&fit=crop", // Close-up
-    "https://images.unsplash.com/photo-1618843479313-40f8afb4b448?w=1200&q=80&fm=webp&fit=crop", // Action
+    "/images/hero/hero-3.jpg", // Exterior
+    "/images/hero/hero-6.jpg", // Interior
+    "/images/hero/hero-5.jpg", // Close-up
+    "/images/hero/hero-9.jpg", // Action
 ];
 
 // Placeholder blur data (very small base64 pixel)
@@ -224,7 +225,7 @@ export function HeroSection() {
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0,_rgba(0,0,0,0.3)_100%)]" />
 
                             {/* Film Grain Effect */}
-                            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
+                            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('/images/patterns/carbon-fibre.png')] mix-blend-overlay" />
 
                             {/* Editorial Text Overlay */}
                             <motion.div

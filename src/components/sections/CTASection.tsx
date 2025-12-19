@@ -3,16 +3,20 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function CTASection() {
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        <img
-          src="https://images.unsplash.com/photo-1483721310020-03333e577078?w=1920&h=600&fit=crop"
+        <Image
+          src="/images/hero/hero-2.jpg"
           alt="Evening city skyline seen through a luxury vehicle window"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          quality={85}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-background/96 via-background/90 to-background/80 backdrop-blur-sm" />
       </div>

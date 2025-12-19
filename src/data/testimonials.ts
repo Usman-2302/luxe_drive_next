@@ -11,12 +11,12 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "Victoria Sterling",
+    name: "Adam Sterling",
     role: "CEO",
     company: "Sterling Investments",
     content: "Luxe Drive has transformed our corporate travel experience. The attention to detail and professionalism of their chauffeurs is unmatched. They've become an essential part of our business operations.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop"
+    image: "/images/testimonials/t-1.jpg"
   },
   {
     id: "2",
@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     company: "Chen & Associates",
     content: "I've used many chauffeur services over the years, but Luxe Drive stands apart. Their punctuality is impeccable, and the vehicles are always immaculate. Highly recommended for executives.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop"
+    image: "/images/testimonials/t-2.jpg"
   },
   {
     id: "3",
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     role: "Fashion Designer",
     content: "From airport pickups to fashion week events, Luxe Drive has never let me down. The luxury and discretion they provide is exactly what I need. Absolutely first-class service.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop"
+    image: "/images/testimonials/t-3.jpg"
   },
   {
     id: "4",
@@ -41,7 +41,7 @@ export const testimonials: Testimonial[] = [
     role: "Professional Athlete",
     content: "When you need reliability and comfort after a long game, Luxe Drive delivers. Their drivers are professional, the cars are top-notch, and booking is effortless.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop"
+    image: "/images/testimonials/t-2.jpg"
   },
   {
     id: "5",
@@ -50,6 +50,6 @@ export const testimonials: Testimonial[] = [
     company: "Prestige Events",
     content: "We trust Luxe Drive for all our VIP guest transportation. They understand the importance of making a great impression and consistently exceed expectations.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop"
+    image: "/images/testimonials/t-3.jpg"
   }
 ];
