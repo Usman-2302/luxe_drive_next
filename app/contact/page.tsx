@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBookingCTA } from "@/components/layout/MobileBookingCTA";
 import { motion } from "framer-motion";
-import { Phone, Mail, Globe, ShieldCheck, Clock, Shield, ArrowRight } from "lucide-react";
+import { Phone, Mail, Globe, ShieldCheck, Clock, Shield, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,8 +16,61 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { createContactRequest, ContactPayload } from "@/lib/contactService";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
+    const { toast } = useToast();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [formData, setFormData] = useState<Omit<ContactPayload, 'createdAt' | 'status'>>({
+        firstName: '',
+        lastName: '',
+        email: '',
+        reason: '',
+        message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSelectChange = (value: string) => {
+        setFormData(prev => ({ ...prev, reason: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus('idle');
+
+        try {
+            await createContactRequest(formData);
+            setStatus('success');
+            toast({
+                title: "Message Sent",
+                description: "Our concierge team will respond shortly.",
+            });
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                reason: '',
+                message: ''
+            });
+        } catch (error) {
+            console.error("Contact submission failed", error);
+            setStatus('error');
+            toast({
+                title: "Submission Failed",
+                description: "Please try again or contact us directly.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <Navbar />
@@ -58,26 +112,48 @@ export default function Contact() {
                                 <p className="text-sm text-muted-foreground font-light">Please allow us to understand how we may best serve you.</p>
                             </div>
 
-                            <form className="space-y-6">
+                            <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-2">First Name</label>
-                                        <Input placeholder="E.g. Alexander" className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl" />
+                                        <Input
+                                            name="firstName"
+                                            value={formData.firstName}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="E.g. Alexander"
+                                            className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl"
+                                        />
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-2">Last Name</label>
-                                        <Input placeholder="E.g. Sterling" className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl" />
+                                        <Input
+                                            name="lastName"
+                                            value={formData.lastName}
+                                            onChange={handleChange}
+                                            required
+                                            placeholder="E.g. Sterling"
+                                            className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl"
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
                                     <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-2">Email Address</label>
-                                    <Input placeholder="alex@example.com" type="email" className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl" />
+                                    <Input
+                                        name="email"
+                                        type="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="alex@example.com"
+                                        className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl"
+                                    />
                                 </div>
 
                                 <div className="space-y-2">
                                     <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-2">Reason for Inquiry</label>
-                                    <Select>
+                                    <Select value={formData.reason} onValueChange={handleSelectChange} required>
                                         <SelectTrigger className="h-12 bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-xl">
                                             <SelectValue placeholder="Select a purpose" />
                                         </SelectTrigger>
@@ -94,19 +170,36 @@ export default function Contact() {
                                 <div className="space-y-2">
                                     <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-2">Message</label>
                                     <Textarea
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        required
                                         placeholder="Briefly describe your requirements..."
                                         className="min-h-[150px] bg-accent/20 border-border/40 focus:border-[hsl(var(--gold))]/40 rounded-2xl resize-none"
                                     />
                                 </div>
 
                                 <div className="pt-4 flex flex-col items-center gap-4">
-                                    <Button variant="luxury-gold" size="xl" className="w-full rounded-2xl h-16 group">
-                                        Request Assistance
-                                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                    <Button
+                                        type="submit"
+                                        variant="luxury-gold"
+                                        size="xl"
+                                        disabled={isSubmitting}
+                                        className="w-full rounded-2xl h-16 group"
+                                    >
+                                        {isSubmitting ? "Processing Request..." : "Request Assistance"}
+                                        {!isSubmitting ? (
+                                            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                        ) : (
+                                            <Loader2 className="ml-2 h-5 w-5 animate-spin" />
+                                        )}
                                     </Button>
                                     <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold flex items-center gap-2">
                                         <Shield className="h-3 w-3" /> Encrypted & Private Submission
                                     </p>
+                                    {status === 'success' && (
+                                        <p className="text-sm text-green-600 font-medium">Message transmitted. We will respond shortly.</p>
+                                    )}
                                 </div>
                             </form>
                         </motion.div>
@@ -192,4 +285,3 @@ export default function Contact() {
         </div>
     );
 }
-

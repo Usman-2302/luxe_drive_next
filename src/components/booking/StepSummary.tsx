@@ -8,6 +8,7 @@ import { chauffeurs } from "@/data/chauffeurs";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ChevronLeft, MapPin, Calendar, Clock, CreditCard, User, Car } from "lucide-react";
 import Link from "next/link";
+import { createBooking } from "@/lib/bookingService";
 
 export function StepSummary({ onPrev }: { onPrev: () => void }) {
     const { state, setConfirmed, resetState } = useBooking();
@@ -16,13 +17,26 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
     const selectedVehicle = fleet.find(v => v.id === state.vehicleId);
     const selectedChauffeur = chauffeurs.find(c => c.id === state.chauffeurId);
 
-    const handleConfirm = () => {
-        setConfirmed();
-        setShowSuccess(true);
-        // Persist cleanup after a short delay
-        setTimeout(() => {
-            resetState();
-        }, 2000);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleConfirm = async () => {
+        setIsSubmitting(true);
+        setError(null);
+        try {
+            await createBooking(state);
+            setConfirmed();
+            setShowSuccess(true);
+            // Persist cleanup after a short delay
+            setTimeout(() => {
+                resetState();
+            }, 2000);
+        } catch (err) {
+            console.error("Booking submission failed", err);
+            setError("Something went wrong. Please try again or contact support.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (showSuccess) {
@@ -42,7 +56,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                     <Button variant="luxury-gold" size="xl" className="rounded-2xl px-16 shadow-xl" asChild>
                         <Link href="/">Back to Concierge</Link>
                     </Button>
-                    <p className="text-xs text-muted-foreground tracking-widest uppercase">LX-REFERENCE-PENDING</p>
+                    <p className="text-xs text-muted-foreground tracking-widest uppercase">LX-{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
                 </div>
             </div>
         );
@@ -86,30 +100,45 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                 {/* Right Col: Logistics */}
                 <div className="space-y-6">
                     <div className="p-8 rounded-[2.5rem] bg-accent/20 border border-border/40 space-y-6 shadow-inner">
-                        <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                            <div className="space-y-1">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold flex items-center gap-2"><Calendar className="h-3 w-3" /> Date</p>
-                                <p className="font-bold">{state.date}</p>
+                        <div className="space-y-4 pb-4 border-b border-border/40">
+                            <h4 className="text-sm font-bold font-['Playfair_Display'] text-[hsl(var(--gold))] uppercase tracking-widest">Journey</h4>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p className="text-[10px] text-muted-foreground uppercase font-bold">Date & Time</p>
+                                    <p className="font-bold text-sm">{state.date} at {state.time}</p>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] text-muted-foreground uppercase font-bold">Party Size</p>
+                                    <p className="font-bold text-sm">{state.passengers} Passenger(s)</p>
+                                </div>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold flex items-center gap-2"><Clock className="h-3 w-3" /> Time</p>
-                                <p className="font-bold">{state.time}</p>
-                            </div>
-                            <div className="col-span-2 space-y-1">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold flex items-center gap-2"><MapPin className="h-3 w-3" /> Route</p>
-                                <p className="text-sm font-medium leading-relaxed">
-                                    <span className="text-muted-foreground italic">From</span> {state.pickup} <br />
-                                    <span className="text-muted-foreground italic">To</span> {state.destination}
-                                </p>
+                                <p className="text-[10px] text-muted-foreground uppercase font-bold">Route</p>
+                                <div className="flex items-center gap-2 text-sm">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--gold))]" /> {state.pickup}
+                                </div>
+                                <div className="w-0.5 h-3 bg-border ml-[3px]" />
+                                <div className="flex items-center gap-2 text-sm">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-foreground" /> {state.destination}
+                                </div>
                             </div>
                         </div>
 
-                        {state.flightNumber && (
-                            <div className="p-4 rounded-xl bg-background/50 border border-border/20 text-xs font-bold flex items-center gap-3">
-                                <div className="w-2 h-2 rounded-full bg-[hsl(var(--gold))] animate-pulse" />
-                                Tracking Flight: {state.flightNumber}
+                        <div className="space-y-4">
+                            <h4 className="text-sm font-bold font-['Playfair_Display'] text-[hsl(var(--gold))] uppercase tracking-widest">Guest</h4>
+                            <div className="space-y-2">
+                                <p className="font-bold text-lg">{state.fullName}</p>
+                                <div className="space-y-1 text-sm text-muted-foreground">
+                                    <p className="flex items-center gap-2">Email: {state.email}</p>
+                                    <p className="flex items-center gap-2">Phone: {state.phone}</p>
+                                </div>
                             </div>
-                        )}
+                            {state.notes && (
+                                <div className="p-4 rounded-xl bg-background/50 border border-border/20 text-xs italic">
+                                    "{state.notes}"
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,12 +151,14 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                     variant="luxury-gold"
                     size="xl"
                     onClick={handleConfirm}
+                    disabled={isSubmitting}
                     className="rounded-2xl group px-16 shadow-lg hover:shadow-[hsl(var(--gold))]/20"
                 >
-                    Confirm Reservation
-                    <CheckCircle2 className="h-5 w-5 ml-2 group-hover:scale-110 transition-transform" />
+                    {isSubmitting ? "Securing..." : "Confirm Reservation"}
+                    {!isSubmitting && <CheckCircle2 className="h-5 w-5 ml-2 group-hover:scale-110 transition-transform" />}
                 </Button>
             </div>
+            {error && <p className="text-center text-destructive text-sm mt-4">{error}</p>}
         </div>
     );
 }

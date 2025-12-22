@@ -14,6 +14,11 @@ export interface BookingState {
     time: string;
     flightNumber?: string;
     specialRequests: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    passengers: number;
+    notes: string;
     isConfirmed: boolean;
 }
 
@@ -27,6 +32,11 @@ const initialState: BookingState = {
     time: "",
     flightNumber: "",
     specialRequests: "",
+    fullName: "",
+    email: "",
+    phone: "",
+    passengers: 1,
+    notes: "",
     isConfirmed: false,
 };
 

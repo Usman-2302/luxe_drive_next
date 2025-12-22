@@ -55,11 +55,60 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                 ))}
             </div>
 
+            {/* Logistics Form */}
+            <div className="max-w-4xl mx-auto space-y-6 pt-8 border-t border-border/40">
+                <div className="space-y-4">
+                    <h3 className="text-xl font-bold font-['Playfair_Display']">Journey <span className="text-gradient">Details</span></h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Pick-up Location</label>
+                            <input
+                                type="text"
+                                placeholder="e.g. JFK Airport Terminal 4"
+                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                value={state.pickup}
+                                onChange={(e) => updateState({ pickup: e.target.value })}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Destination</label>
+                            <input
+                                type="text"
+                                placeholder="e.g. The Plaza Hotel"
+                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                value={state.destination}
+                                onChange={(e) => updateState({ destination: e.target.value })}
+                            />
+                        </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Date</label>
+                            <input
+                                type="date"
+                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                value={state.date}
+                                onChange={(e) => updateState({ date: e.target.value })}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Time</label>
+                            <input
+                                type="time"
+                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                value={state.time}
+                                onChange={(e) => updateState({ time: e.target.value })}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div className="flex justify-center pt-8">
                 <Button
                     variant="luxury-gold"
                     size="xl"
-                    disabled={!state.serviceId}
+                    disabled={!state.serviceId || !state.pickup || !state.destination || !state.date || !state.time}
                     onClick={onNext}
                     className="rounded-2xl px-12 group"
                 >

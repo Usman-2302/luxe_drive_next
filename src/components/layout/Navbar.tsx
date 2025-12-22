@@ -156,7 +156,7 @@ export function Navbar() {
               <span>+1 (234) 567-890</span>
             </a>
             <Button variant="luxury-gold" size="sm" className="rounded-full px-6" asChild>
-              <Link href="/#booking">Book Now</Link>
+              <Link href="/booking">Book Now</Link>
             </Button>
           </div>
 

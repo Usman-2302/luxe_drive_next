@@ -6,15 +6,15 @@ import { useSearchParams } from "next/navigation";
 import { useBooking, ServiceType } from "./BookingContext";
 import { StepServiceSelection } from "./StepServiceSelection";
 import { StepSelection } from "./StepSelection";
-import { StepDetailsForm } from "./StepDetailsForm";
+import { StepPassengerDetails } from "./StepPassengerDetails";
 import { StepSummary } from "./StepSummary";
 import { cn } from "@/lib/utils";
-import { Check, ChevronLeft, Briefcase, Car, MapPin, ClipboardList } from "lucide-react";
+import { Check, ChevronLeft, Briefcase, Car, MapPin, ClipboardList, User } from "lucide-react";
 
 const STEPS = [
-    { id: 1, title: "Service", icon: Briefcase },
-    { id: 2, title: "Selection", icon: Car },
-    { id: 3, title: "Logistics", icon: MapPin },
+    { id: 1, title: "Plan", icon: MapPin },
+    { id: 2, title: "Select", icon: Car },
+    { id: 3, title: "Details", icon: User },
     { id: 4, title: "Confirm", icon: ClipboardList },
 ];
 
@@ -35,9 +35,11 @@ export function BookingSteps() {
             ...(chauffeur && { chauffeurId: chauffeur }),
         });
 
-        if (service) setCurrentStep(2);
-        if (vehicle || chauffeur) setCurrentStep(3); // If they already have a car/driver, go to details? No, let's go to 2 to confirm selection if they want.
-        // Actually, if coming from Fleet/Chauffeur card, we probably want to skip Step 2 or at least pre-select.
+        // Smart redirect logic
+        // If we have service, pickup, dest, date, time -> Step 2
+        // Hard to know about form fields from URL params unless we serialize them.
+        // For now, if service is present, we still need logistics, so stay on Step 1.
+        // Unless we want 'quick book' from homepage that prefills.
     }, []);
 
     const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, STEPS.length));
@@ -48,9 +50,11 @@ export function BookingSteps() {
             case 1:
                 return <StepServiceSelection onNext={nextStep} />;
             case 2:
+                // StepSelection (Vehicle) usually goes back to Service
                 return <StepSelection onNext={nextStep} onPrev={prevStep} />;
             case 3:
-                return <StepDetailsForm onNext={nextStep} onPrev={prevStep} />;
+                // New Passenger Step
+                return <StepPassengerDetails onNext={nextStep} onPrev={prevStep} />;
             case 4:
                 return <StepSummary onPrev={prevStep} />;
             default:
