@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <FleetPageTemplate
-            filterType="van"
+            filterType="Van"
             title="Vans & MPVs"
             description="Luxury group travel redefined. Spacious interiors configured for conversation and comfort."
         />

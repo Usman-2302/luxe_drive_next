@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <FleetPageTemplate
-            filterType="suv"
+            filterType="SUV"
             title="SUV Collection"
             description="Commanding presence meets exceptional space. Perfect for groups, luggage, or those who prefer a higher vantage point."
         />

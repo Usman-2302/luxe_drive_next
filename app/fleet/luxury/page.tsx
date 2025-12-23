@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <FleetPageTemplate
-            filterClass="luxury"
+            filterClass="premium"
             title="Luxury Fleet"
             description="The pinnacle of automotive excellence. Experience unmatched prestige and comfort in our flagship vehicles."
         />
