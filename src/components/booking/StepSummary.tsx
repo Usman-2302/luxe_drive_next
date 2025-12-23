@@ -143,8 +143,8 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                 </div>
             </div>
 
-            <div className="flex justify-between pt-8 border-t border-border/40">
-                <Button variant="ghost" onClick={onPrev} className="rounded-xl">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40">
+                <Button variant="ghost" onClick={onPrev} className="w-full sm:w-auto rounded-xl">
                     <ChevronLeft className="h-5 w-5 mr-2" /> Adjust Details
                 </Button>
                 <Button
@@ -152,7 +152,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                     size="xl"
                     onClick={handleConfirm}
                     disabled={isSubmitting}
-                    className="rounded-2xl group px-16 shadow-lg hover:shadow-[hsl(var(--gold))]/20"
+                    className="w-full sm:w-auto rounded-2xl group px-8 sm:px-16 shadow-lg hover:shadow-[hsl(var(--gold))]/20"
                 >
                     {isSubmitting ? "Securing..." : "Confirm Reservation"}
                     {!isSubmitting && <CheckCircle2 className="h-5 w-5 ml-2 group-hover:scale-110 transition-transform" />}

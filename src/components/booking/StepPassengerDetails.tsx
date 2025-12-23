@@ -125,15 +125,15 @@ export function StepPassengerDetails({ onNext, onPrev }: StepPassengerDetailsPro
                 </div>
             </div>
 
-            <div className="flex justify-between pt-8 border-t border-border/40 max-w-4xl mx-auto">
-                <Button variant="ghost" onClick={onPrev} className="rounded-xl">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40 max-w-4xl mx-auto">
+                <Button variant="ghost" onClick={onPrev} className="w-full sm:w-auto rounded-xl">
                     <ChevronLeft className="h-5 w-5 mr-2" /> Vehicle Selection
                 </Button>
                 <Button
                     variant="luxury-gold"
                     size="xl"
                     onClick={handleNext}
-                    className="rounded-2xl group px-12"
+                    className="w-full sm:w-auto rounded-2xl group px-8 sm:px-12"
                 >
                     Review Reservation
                     <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
