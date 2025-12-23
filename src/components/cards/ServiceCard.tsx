@@ -21,7 +21,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Link href={`/services#${service.id}`}>
+      <Link href={`/services/${service.id}`}>
         <motion.div
           whileHover={{ y: -8 }}
           className={cn(
