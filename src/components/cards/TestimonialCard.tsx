@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { Testimonial } from "@/data/testimonials";
 
@@ -37,10 +38,13 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
 
       {/* Author */}
       <div className="flex items-center gap-4">
-        <img
+        <Image
           src={testimonial.image}
           alt={testimonial.name}
-          className="w-12 h-12 rounded-full object-cover ring-2 ring-[hsl(var(--silver))]/20"
+          width={48}
+          height={48}
+          className="rounded-full object-cover ring-2 ring-[hsl(var(--silver))]/20"
+          sizes="48px"
         />
         <div>
           <p className="font-semibold">{testimonial.name}</p>

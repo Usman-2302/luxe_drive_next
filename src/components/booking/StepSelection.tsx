@@ -7,7 +7,8 @@ import { fleet } from "@/data/fleet";
 import { chauffeurs } from "@/data/chauffeurs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ArrowRight, Car, UserCheck, Star, Users } from "lucide-react";
+import { Star, Users, ChevronLeft, ArrowRight, Car, UserCheck } from "lucide-react";
+import Image from "next/image";
 
 export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: () => void }) {
     const { state, updateState } = useBooking();
@@ -37,7 +38,14 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                                 state.vehicleId === v.id ? "border-[hsl(var(--gold))] ring-1 ring-[hsl(var(--gold))]/20" : "border-border/40 hover:border-border/60"
                             )}
                         >
-                            <img src={v.image} alt={v.name} className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <Image
+                                src={v.image}
+                                alt={v.name}
+                                width={400}
+                                height={160}
+                                className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-700"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            />
                             <div className="p-5">
                                 <p className="font-bold text-base mb-1">{v.name}</p>
                                 <div className="flex items-center gap-4 text-xs text-muted-foreground font-medium">
@@ -68,7 +76,15 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                                 state.chauffeurId === c.id ? "border-[hsl(var(--gold))] bg-[hsl(var(--gold))]/5" : "border-border/40"
                             )}
                         >
-                            <img src={c.image} alt={c.name} className="w-16 h-16 rounded-full mx-auto object-cover mb-3 border-2 border-border/20 shadow-lg" />
+                            <div className="relative w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-border/20 shadow-lg">
+                                <Image
+                                    src={c.image}
+                                    alt={c.name}
+                                    fill
+                                    className="object-cover"
+                                    sizes="64px"
+                                />
+                            </div>
                             <p className="font-bold text-xs mb-1">{c.name}</p>
                             <div className="flex items-center justify-center gap-1 text-[10px] text-[hsl(var(--gold))] font-bold">
                                 <Star className="h-2 w-2 fill-current" /> {c.rating}

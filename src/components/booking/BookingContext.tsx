@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
 
 export type ServiceType = "airport" | "hotel" | "corporate" | "wedding" | "tour" | "";
 
@@ -74,19 +74,19 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         }
     }, [state, isInitialized]);
 
-    const updateState = (updates: Partial<BookingState>) => {
+    const updateState = useCallback((updates: Partial<BookingState>) => {
         setState((prev) => ({ ...prev, ...updates }));
-    };
+    }, []);
 
-    const resetState = () => {
+    const resetState = useCallback(() => {
         setState(initialState);
         sessionStorage.removeItem("luxe_drive_booking");
-    };
+    }, []);
 
-    const setConfirmed = () => {
+    const setConfirmed = useCallback(() => {
         updateState({ isConfirmed: true });
         // Final clear happen after transition to success
-    };
+    }, [updateState]);
 
     return (
         <BookingContext.Provider value={{ state, updateState, resetState, setConfirmed, isInitialized }}>

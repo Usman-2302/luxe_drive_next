@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useBooking, ServiceType } from "./BookingContext";
-import { StepServiceSelection } from "./StepServiceSelection";
-import { StepSelection } from "./StepSelection";
-import { StepPassengerDetails } from "./StepPassengerDetails";
-import { StepSummary } from "./StepSummary";
+
+const StepServiceSelection = dynamic(() => import("./StepServiceSelection").then(mod => mod.StepServiceSelection));
+const StepSelection = dynamic(() => import("./StepSelection").then(mod => mod.StepSelection));
+const StepPassengerDetails = dynamic(() => import("./StepPassengerDetails").then(mod => mod.StepPassengerDetails));
+const StepSummary = dynamic(() => import("./StepSummary").then(mod => mod.StepSummary));
 import { cn } from "@/lib/utils";
 import { Check, ChevronLeft, Briefcase, Car, MapPin, ClipboardList, User } from "lucide-react";
 

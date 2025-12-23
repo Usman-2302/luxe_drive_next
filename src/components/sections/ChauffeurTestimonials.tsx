@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
+import Image from "next/image";
 import { testimonials } from "@/data/testimonials";
 
 export function ChauffeurTestimonials() {
@@ -60,7 +61,13 @@ export function ChauffeurTestimonials() {
 
                                 <div className="flex items-center gap-4 mb-6">
                                     <div className="relative h-14 w-14 rounded-full overflow-hidden border-2 border-[hsl(var(--gold))]/20">
-                                        <img src={testimonial.image} alt={testimonial.name} className="object-cover w-full h-full" />
+                                        <Image
+                                            src={testimonial.image}
+                                            alt={testimonial.name}
+                                            fill
+                                            className="object-cover"
+                                            sizes="56px"
+                                        />
                                     </div>
                                     <div>
                                         <p className="font-bold font-['Playfair_Display'] text-lg">{testimonial.name}</p>

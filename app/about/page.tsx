@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Shield, Clock, Star, Users, Car, Heart, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function About() {
     return (
@@ -25,11 +26,11 @@ export default function About() {
                             transition={{ duration: 0.8 }}
                             className="max-w-3xl mx-auto"
                         >
-                            <h1 className="text-5xl md:text-7xl font-bold font-['Playfair_Display'] mb-8 leading-tight">
+                            <h1 className="text-5xl md:text-7xl font-bold font-['Playfair_Display'] mb-8 leading-tight text-white">
                                 The Art of the <br />
-                                <span className="text-gradient">Journey</span>
+                                <span className="text-gradient-gold">Journey</span>
                             </h1>
-                            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed">
+                            <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed">
                                 Redefining luxury ground transportation through precision, privacy, and an unwavering commitment to excellence.
                             </p>
                         </motion.div>
@@ -95,17 +96,19 @@ export default function About() {
                                     ].map((item, i) => (
                                         <div key={i} className="flex items-center gap-3 group">
                                             <CheckCircle2 className="h-5 w-5 text-[hsl(var(--gold))] shrink-0 group-hover:scale-110 transition-transform" />
-                                            <span className="text-sm font-medium tracking-wide italic">{item}</span>
+                                            <span className="text-sm font-medium tracking-wide italic text-foreground/90">{item}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             <div className="flex-1 relative">
                                 <div className="aspect-[4/3] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl group">
-                                    <img
+                                    <Image
                                         src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&fit=crop"
                                         alt="Luxury Vehicle Detail"
-                                        className="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-[3s]"
+                                        fill
+                                        className="object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-[3s]"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
                                 </div>
@@ -123,14 +126,14 @@ export default function About() {
                     <div className="luxury-container relative z-10">
                         <div className="max-w-4xl mx-auto text-center space-y-12">
                             <div className="space-y-4">
-                                <h2 className="text-4xl md:text-5xl font-bold font-['Playfair_Display']">Mastery Behind the <span className="text-gradient">Wheel</span></h2>
+                                <h2 className="text-4xl md:text-5xl font-bold font-['Playfair_Display'] text-white">Mastery Behind the <span className="text-gradient-gold">Wheel</span></h2>
                                 <div className="h-px w-24 bg-[hsl(var(--gold))]/40 mx-auto mt-6" />
                             </div>
                             <div className="prose prose-invert max-w-none">
-                                <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed italic">
+                                <p className="text-xl md:text-2xl text-slate-200 font-light leading-relaxed italic">
                                     "A Luxe Drive chauffeur is more than a driver; they are a protocol-certified professional trained in the fine art of service. Each member of our team undergoes extensive background vetting and defensive driving certification, ensuring that your safety and comfort are never compromised."
                                 </p>
-                                <p className="text-lg text-muted-foreground font-light leading-relaxed mt-8">
+                                <p className="text-lg text-slate-300 font-light leading-relaxed mt-8">
                                     Beyond their technical mastery of the road, our chauffeurs are masters of etiquette and discretion. They possess an intimate knowledge of the cities they serve, allowing them to navigate complex routes with effortless grace.
                                 </p>
                             </div>
@@ -153,10 +156,12 @@ export default function About() {
                             </div>
                             <div className="flex-1 relative">
                                 <div className="aspect-[16/9] rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl group">
-                                    <img
+                                    <Image
                                         src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&fit=crop"
                                         alt="Luxury Fleet"
-                                        className="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-[3s]"
+                                        fill
+                                        className="object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-[3s]"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
                                 </div>
@@ -200,12 +205,12 @@ export default function About() {
                             viewport={{ once: true }}
                             className="max-w-2xl mx-auto space-y-8"
                         >
-                            <h2 className="text-4xl md:text-6xl font-bold font-['Playfair_Display'] leading-tight">
+                            <h2 className="text-4xl md:text-6xl font-bold font-['Playfair_Display'] leading-tight text-white">
                                 Your arrival, <br />
-                                <span className="text-gradient font-italic animate-pulse">perfectly composed.</span>
+                                <span className="text-gradient-gold font-italic animate-pulse">perfectly composed.</span>
                             </h2>
                             <div className="h-px w-32 bg-[hsl(var(--gold))]/40 mx-auto" />
-                            <p className="text-xl text-muted-foreground font-light">
+                            <p className="text-xl text-white/80 font-light">
                                 Experience the standard of luxury transport that redefined the industry.
                             </p>
                             <div className="pt-4">
