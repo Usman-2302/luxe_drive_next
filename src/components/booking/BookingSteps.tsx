@@ -20,27 +20,25 @@ const STEPS = [
 
 export function BookingSteps() {
     const searchParams = useSearchParams();
-    const { state, updateState } = useBooking();
+    const { state, updateState, isInitialized } = useBooking();
     const [currentStep, setCurrentStep] = useState(1);
 
-    // Sync query params once on mount
+    // Sync query params once on mount (wait for hydration)
     useEffect(() => {
+        if (!isInitialized) return;
+
         const service = searchParams.get("service") as ServiceType;
         const vehicle = searchParams.get("vehicle");
         const chauffeur = searchParams.get("chauffeur");
 
-        updateState({
-            ...(service && { serviceId: service }),
-            ...(vehicle && { vehicleId: vehicle }),
-            ...(chauffeur && { chauffeurId: chauffeur }),
-        });
-
-        // Smart redirect logic
-        // If we have service, pickup, dest, date, time -> Step 2
-        // Hard to know about form fields from URL params unless we serialize them.
-        // For now, if service is present, we still need logistics, so stay on Step 1.
-        // Unless we want 'quick book' from homepage that prefills.
-    }, []);
+        if (service || vehicle || chauffeur) {
+            updateState({
+                ...(service && { serviceId: service }),
+                ...(vehicle && { vehicleId: vehicle }),
+                ...(chauffeur && { chauffeurId: chauffeur }),
+            });
+        }
+    }, [isInitialized, searchParams, updateState]);
 
     const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, STEPS.length));
     const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Vehicle } from "@/data/vehicles";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // Placeholder blur data (very small base64 pixel)
@@ -25,6 +26,7 @@ const amenityIcons: Record<string, typeof Wifi> = {
 };
 
 export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -156,7 +158,13 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
                   variant="luxury-gold"
                   size="lg"
                   className="w-full"
-                  onClick={() => onBook?.(vehicle)}
+                  onClick={() => {
+                    if (onBook) {
+                      onBook(vehicle);
+                    } else {
+                      router.push(`/booking?vehicle=${vehicle.id}`);
+                    }
+                  }}
                 >
                   Book Now
                   <ChevronRight className="h-4 w-4" />

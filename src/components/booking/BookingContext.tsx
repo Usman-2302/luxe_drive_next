@@ -45,6 +45,7 @@ interface BookingContextType {
     updateState: (updates: Partial<BookingState>) => void;
     resetState: () => void;
     setConfirmed: () => void;
+    isInitialized: boolean;
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -88,7 +89,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <BookingContext.Provider value={{ state, updateState, resetState, setConfirmed }}>
+        <BookingContext.Provider value={{ state, updateState, resetState, setConfirmed, isInitialized }}>
             {children}
         </BookingContext.Provider>
     );
