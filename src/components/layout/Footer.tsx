@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { subscribeToNewsletter } from "@/lib/subscriptionService";
 
 const footerLinks = {
   services: [
@@ -61,22 +62,42 @@ export function Footer() {
     e.preventDefault();
     if (!email) return;
 
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      await subscribeToNewsletter(email);
 
-    setIsLoading(false);
-    setIsSubscribed(true);
-    toast({
-      title: "Successfully subscribed!",
-      description: "Thank you for joining our newsletter.",
-    });
+      setIsLoading(false);
+      setIsSubscribed(true);
+      toast({
+        title: "Successfully subscribed!",
+        description: "Thank you for joining our newsletter.",
+      });
 
-    setTimeout(() => {
-      setIsSubscribed(false);
-      setEmail("");
-    }, 3000);
+      setTimeout(() => {
+        setIsSubscribed(false);
+        setEmail("");
+      }, 3000);
+    } catch (error) {
+      console.error("Subscription error:", error);
+      setIsLoading(false);
+      toast({
+        title: "Subscription failed",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

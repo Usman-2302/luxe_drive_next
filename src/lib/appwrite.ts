@@ -18,4 +18,5 @@ export const APPWRITE_CONFIG = {
     databaseId: process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID || '',
     bookingsCollectionId: process.env.NEXT_PUBLIC_APPWRITE_BOOKINGS_COLLECTION_ID || '',
     contactCollectionId: process.env.NEXT_PUBLIC_APPWRITE_CONTACT_COLLECTION_ID || '',
+    subscriptionCollectionId: process.env.NEXT_PUBLIC_APPWRITE_SUBSCRIPTIONS_COLLECTION_ID || '',
 };
