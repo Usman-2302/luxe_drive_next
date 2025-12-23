@@ -2,36 +2,26 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBookingCTA } from "@/components/layout/MobileBookingCTA";
 import { CTASection } from "@/components/sections/CTASection";
-import { vehicles, vehicleClasses, vehicleTypes } from "@/data/vehicles";
+import { fleet, type FleetVehicle } from "@/data/fleet";
 import { VehicleCard } from "@/components/cards/VehicleCard";
 import Image from "next/image";
 
 interface FleetPageTemplateProps {
-    filterType?: typeof vehicleTypes[number] | "van";
-    filterClass?: typeof vehicleClasses[number] | "luxury";
+    filterType?: "Sedan" | "SUV" | "Van";
+    filterClass?: "executive" | "premium";
     title: string;
     description: string;
 }
 
 export function FleetPageTemplate({ filterType, filterClass, title, description }: FleetPageTemplateProps) {
-    const filteredVehicles = vehicles.filter((v) => {
+    const filteredVehicles = fleet.filter((v) => {
         // Check type match
         if (filterType && v.type !== filterType) {
             return false;
         }
 
         // Check class match
-        if (filterClass) {
-            if (filterClass === "luxury") {
-                return v.class === "premium";
-            }
-            if (filterClass === "executive") {
-                return v.class === "executive";
-            }
-            // For direct matches if filterClass is a valid vehicle class
-            if ((filterClass as string) === v.class) return true;
-
-            // If strict matching required and no match found
+        if (filterClass && v.class !== filterClass) {
             return false;
         }
 

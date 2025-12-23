@@ -28,7 +28,7 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                     <h3 className="text-xl font-bold font-['Playfair_Display'] uppercase tracking-widest text-xs">Selection Phase A: Elite Fleet</h3>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {fleet.slice(0, 3).map((v) => (
+                    {fleet.map((v) => (
                         <div
                             key={v.id}
                             onClick={() => updateState({ vehicleId: v.id })}

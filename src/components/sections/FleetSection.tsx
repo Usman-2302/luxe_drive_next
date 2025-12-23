@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { VehicleCard } from "@/components/cards/VehicleCard";
-import { vehicles } from "@/data/vehicles";
+import { fleet } from "@/data/fleet";
 import { Button } from "@/components/ui/button";
 
 export function FleetSection() {
@@ -27,7 +27,7 @@ export function FleetSection() {
           </div>
         </motion.div>
         <div ref={scrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4 snap-x">
-          {vehicles.map((vehicle, i) => (
+          {fleet.map((vehicle, i) => (
             <div key={vehicle.id} className="min-w-[320px] snap-start"><VehicleCard vehicle={vehicle} index={i} /></div>
           ))}
         </div>

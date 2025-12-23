@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Users, Briefcase, Wifi, Droplets, Sparkles, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Vehicle } from "@/data/vehicles";
+import type { FleetVehicle } from "@/data/fleet";
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -14,9 +14,9 @@ import Image from "next/image";
 const BLUR_PLACEHOLDER = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
 interface VehicleCardProps {
-  vehicle: Vehicle;
+  vehicle: FleetVehicle;
   index: number;
-  onBook?: (vehicle: Vehicle) => void;
+  onBook?: (vehicle: FleetVehicle) => void;
 }
 
 const amenityIcons: Record<string, typeof Wifi> = {
@@ -87,7 +87,7 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
           <div className="absolute top-4 right-4 flex items-center gap-2">
             <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-background/80 backdrop-blur-sm text-xs">
               <Users className="h-3 w-3" />
-              {vehicle.capacity}
+              {vehicle.seats}
             </div>
             <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-background/80 backdrop-blur-sm text-xs">
               <Briefcase className="h-3 w-3" />
@@ -106,14 +106,14 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
                 className="absolute inset-0 bg-background/90 backdrop-blur-sm flex items-center justify-center p-6"
               >
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-4">Amenities</p>
+                  <p className="text-sm text-muted-foreground mb-4">Features</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {vehicle.amenities.map((amenity, i) => (
+                    {vehicle.features.slice(0, 4).map((feature, i) => (
                       <span
                         key={i}
                         className="px-3 py-1.5 rounded-full bg-accent text-sm"
                       >
-                        {amenity}
+                        {feature}
                       </span>
                     ))}
                   </div>
@@ -137,7 +137,7 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
             <div className="text-right">
               <p className="text-xs text-muted-foreground">From</p>
               <p className="text-xl font-bold text-gradient">
-                ${vehicle.priceFrom}
+                ${vehicle.price}
               </p>
             </div>
           </div>
