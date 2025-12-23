@@ -7,7 +7,7 @@ import { testimonials } from "@/data/testimonials";
 
 export function ChauffeurTestimonials() {
     return (
-        <section className="section-padding bg-slate-950/40 relative overflow-hidden">
+        <section className="section-padding bg-secondary/50 dark:bg-slate-950/40 relative overflow-hidden">
             {/* Decorative Blur */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-[hsl(var(--gold))]/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/3" />
 
@@ -21,23 +21,23 @@ export function ChauffeurTestimonials() {
                     >
                         <div className="space-y-4">
                             <p className="text-[hsl(var(--gold))] font-bold tracking-[0.2em] uppercase text-sm">Guest Experiences</p>
-                            <h2 className="text-4xl md:text-5xl font-bold font-['Playfair_Display'] leading-tight text-white">
-                                Refined Journeys, <span className="text-gradient-gold">Lasting Impressions</span>
+                            <h2 className="text-4xl md:text-5xl font-bold font-['Playfair_Display'] leading-tight text-foreground">
+                                Refined Journeys, <span className="text-gradient">Lasting Impressions</span>
                             </h2>
                         </div>
 
-                        <p className="text-xl text-white/70 font-light leading-relaxed max-w-xl">
+                        <p className="text-xl text-muted-foreground font-light leading-relaxed max-w-xl">
                             Our clients value the discretion, punctuality, and professionalism that defines the Luxe Drive experience. Hear from those who have traveled with our elite chauffeurs.
                         </p>
 
                         <div className="flex items-center gap-12 pt-4">
                             <div>
-                                <p className="text-4xl font-bold font-['Playfair_Display'] mb-1 text-white">500+</p>
-                                <p className="text-xs text-slate-400 uppercase tracking-widest">Global Clients</p>
+                                <p className="text-4xl font-bold font-['Playfair_Display'] mb-1 text-foreground">500+</p>
+                                <p className="text-xs text-muted-foreground uppercase tracking-widest">Global Clients</p>
                             </div>
                             <div className="w-px h-12 bg-border/40" />
                             <div>
-                                <p className="text-4xl font-bold font-['Playfair_Display'] mb-1 text-white">4.9/5</p>
+                                <p className="text-4xl font-bold font-['Playfair_Display'] mb-1 text-foreground">4.9/5</p>
                                 <div className="flex items-center gap-1">
                                     {[...Array(5)].map((_, i) => (
                                         <Star key={i} className="h-3 w-3 fill-[hsl(var(--gold))] text-[hsl(var(--gold))]" />
@@ -70,12 +70,12 @@ export function ChauffeurTestimonials() {
                                         />
                                     </div>
                                     <div>
-                                        <p className="font-bold font-['Playfair_Display'] text-lg text-white">{testimonial.name}</p>
+                                        <p className="font-bold font-['Playfair_Display'] text-lg text-foreground">{testimonial.name}</p>
                                         <p className="text-xs text-[hsl(var(--gold))] uppercase tracking-widest">{testimonial.role} • {testimonial.company}</p>
                                     </div>
                                 </div>
 
-                                <p className="text-slate-300 italic leading-relaxed relative z-10">
+                                <p className="text-muted-foreground italic leading-relaxed relative z-10">
                                     "{testimonial.content}"
                                 </p>
                             </motion.div>
