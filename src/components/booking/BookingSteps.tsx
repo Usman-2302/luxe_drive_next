@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
@@ -24,6 +24,16 @@ export function BookingSteps() {
     const searchParams = useSearchParams();
     const { state, updateState, isInitialized } = useBooking();
     const [currentStep, setCurrentStep] = useState(1);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Scroll to top of container when step changes
+    useEffect(() => {
+        if (containerRef.current) {
+            // Use window.scrollTo or element.scrollIntoView
+            // scrollIntoView is more elegant for component-based scrolling
+            containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }, [currentStep]);
 
     // Sync query params once on mount (wait for hydration)
     useEffect(() => {
@@ -63,7 +73,7 @@ export function BookingSteps() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div ref={containerRef} className="max-w-4xl mx-auto px-4 py-8 scroll-mt-24">
             {/* Step Indicator */}
             <div className="mb-12 relative flex justify-between">
                 <div className="absolute top-5 left-0 w-full h-0.5 bg-accent/30 -z-0" />
