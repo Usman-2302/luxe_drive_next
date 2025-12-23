@@ -23,7 +23,7 @@ export function BrandedLoader() {
                         className="stroke-[hsl(var(--gold))] stroke-[1.5px]"
                     >
                         <motion.path
-                            d="M10,32 L25,32 C27,32 29,30 30,28 L40,12 C44,6 50,6 55,6 L105,6 C112,6 118,10 120,16 L128,28 C130,30 132,32 135,32 L150,32"
+                            d="M10,27 L25,27 C27,27 29,25 30,23 L40,7 C44,1 50,1 55,1 L105,1 C112,1 118,5 120,11 L128,23 C130,25 132,27 135,27 L150,27"
                             strokeDasharray="200"
                             initial={{ strokeDashoffset: 200 }}
                             animate={{
@@ -38,7 +38,7 @@ export function BrandedLoader() {
                         {/* Dynamic Wheels */}
                         <motion.circle
                             cx="35"
-                            cy="32"
+                            cy="34"
                             r="6"
                             initial={{ opacity: 0 }}
                             animate={{
@@ -49,7 +49,7 @@ export function BrandedLoader() {
                         />
                         <motion.circle
                             cx="125"
-                            cy="32"
+                            cy="34"
                             r="6"
                             initial={{ opacity: 0 }}
                             animate={{
