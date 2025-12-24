@@ -102,7 +102,7 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                     size="xl"
                     disabled={!state.vehicleId || !state.chauffeurId}
                     onClick={onNext}
-                    className="w-full sm:w-auto rounded-2xl group px-8 sm:px-12"
+                    className="w-full sm:w-auto rounded-2xl h-auto min-h-[3.5rem] py-4 text-base sm:text-lg whitespace-normal group px-6 sm:px-12"
                 >
                     Technical Details
                     <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />

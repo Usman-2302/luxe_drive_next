@@ -177,7 +177,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                     size="xl"
                     onClick={handleConfirm}
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto rounded-2xl group px-8 sm:px-16 shadow-lg hover:shadow-[hsl(var(--gold))]/20"
+                    className="w-full sm:w-auto rounded-2xl h-auto min-h-[3.5rem] py-4 text-base sm:text-lg whitespace-normal group px-8 sm:px-16 shadow-lg hover:shadow-[hsl(var(--gold))]/20"
                 >
                     {isSubmitting ? "Securing..." : "Confirm Reservation"}
                     {!isSubmitting && <CheckCircle2 className="h-5 w-5 ml-2 group-hover:scale-110 transition-transform" />}
