@@ -44,7 +44,7 @@ export function StepPassengerDetails({ onNext, onPrev }: StepPassengerDetailsPro
                 </p>
             </div>
 
-            <div className="max-w-2xl mx-auto space-y-6 p-8 rounded-[2rem] glass border border-border/40">
+            <div className="max-w-2xl mx-auto space-y-6 p-8 rounded-[2rem] glass border border-border/40 mx-2 md:mx-auto shadow-[0_2px_10px_-1px_rgba(212,175,55,0.15)]">
 
                 <div className="space-y-4">
                     <div className="space-y-2">
@@ -125,7 +125,7 @@ export function StepPassengerDetails({ onNext, onPrev }: StepPassengerDetailsPro
                 </div>
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40 max-w-4xl mx-auto">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40 max-w-4xl mx-auto p-4">
                 <Button variant="ghost" onClick={onPrev} className="w-full sm:w-auto rounded-xl">
                     <ChevronLeft className="h-5 w-5 mr-2" /> Vehicle Selection
                 </Button>

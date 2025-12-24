@@ -93,7 +93,7 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                 </div>
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40 p-4">
                 <Button variant="ghost" onClick={onPrev} className="w-full sm:w-auto rounded-xl">
                     <ChevronLeft className="h-5 w-5 mr-2" /> Previous
                 </Button>

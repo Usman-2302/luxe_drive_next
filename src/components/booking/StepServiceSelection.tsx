@@ -130,7 +130,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
             )}
 
             {/* Logistics Form */}
-            <div className="max-w-4xl mx-auto space-y-6 pt-8 border-t border-border/40">
+            <div className="max-w-4xl mx-auto space-y-6 pt-8 border-t border-border/40 px-2">
                 <div className="space-y-4">
                     <h3 className="text-xl font-bold font-['Playfair_Display']">Journey <span className="text-gradient">Details</span></h3>
                     <div className="grid md:grid-cols-2 gap-6">
@@ -139,7 +139,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                             <input
                                 type="text"
                                 placeholder="e.g. JFK Airport Terminal 4"
-                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                className="w-full max-w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all box-border"
                                 value={state.pickup}
                                 onChange={(e) => updateState({ pickup: e.target.value })}
                             />
@@ -149,7 +149,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                             <input
                                 type="text"
                                 placeholder="e.g. The Plaza Hotel"
-                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                                className="w-full max-w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all box-border"
                                 value={state.destination}
                                 onChange={(e) => updateState({ destination: e.target.value })}
                             />
@@ -221,7 +221,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                 </div>
             </div>
 
-            <div className="flex justify-center pt-8">
+            <div className="flex justify-center pt-8 p-4">
                 <Button
                     variant="luxury-gold"
                     size="xl"

@@ -44,7 +44,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
         return (
             <div className="text-center space-y-12 animate-in zoom-in-95 duration-500">
                 <div className="flex flex-col items-center gap-6">
-                    <div className="w-24 h-24 rounded-full bg-[hsl(var(--gold))]/20 flex items-center justify-center text-[hsl(var(--gold))] shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                    <div className="w-24 h-24 rounded-full bg-[hsl(var(--gold))]/20 flex items-center justify-center text-[hsl(var(--gold))] shadow-[0_0_15px_rgba(212,175,55,0.15)]">
                         <CheckCircle2 className="h-12 w-12" />
                     </div>
                     <div className="space-y-2">
@@ -57,7 +57,6 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                     <Button variant="luxury-gold" size="xl" className="rounded-2xl px-16 shadow-xl" asChild>
                         <Link href="/">Back to Concierge</Link>
                     </Button>
-                    <p className="text-xs text-muted-foreground tracking-widest uppercase">LX-{Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
                 </div>
             </div>
         );
@@ -73,7 +72,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
             <div className="grid lg:grid-cols-2 gap-8">
                 {/* Left Col: Selections */}
                 <div className="space-y-6">
-                    <div className="p-8 rounded-[2.5rem] glass border border-border/40 space-y-6 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]">
+                    <div className="p-8 rounded-[2.5rem] glass border border-border/40 space-y-6 shadow-[0_2px_10px_-1px_rgba(212,175,55,0.15)] mx-1">
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-2xl bg-[hsl(var(--gold))]/10 border border-[hsl(var(--gold))]/20">
                                 <Car className="h-6 w-6 text-[hsl(var(--gold))]" />
@@ -100,7 +99,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
 
                 {/* Right Col: Logistics */}
                 <div className="space-y-6">
-                    <div className="p-8 rounded-[2.5rem] bg-accent/20 border border-border/40 space-y-6 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]">
+                    <div className="p-8 rounded-[2.5rem] bg-accent/20 border border-border/40 space-y-6 shadow-[0_2px_10px_-1px_rgba(212,175,55,0.15)] mx-1">
                         <div className="space-y-4 pb-4 border-b border-border/40">
                             <h4 className="text-sm font-bold font-['Playfair_Display'] text-[hsl(var(--gold))] uppercase tracking-widest">Journey</h4>
                             <div className="grid grid-cols-2 gap-4">
@@ -169,7 +168,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                 </div>
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-6 pt-8 border-t border-border/40 p-4">
                 <Button variant="ghost" onClick={onPrev} className="w-full sm:w-auto rounded-xl">
                     <ChevronLeft className="h-5 w-5 mr-2" /> Adjust Details
                 </Button>

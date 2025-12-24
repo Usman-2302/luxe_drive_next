@@ -112,12 +112,13 @@ export function ServicePricing({
             </div>
 
             {/* Total Estimation */}
-            <div className="p-6 rounded-2xl bg-[#0a0a0a] border border-[hsl(var(--gold))]/20 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Total Estimation */}
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 dark:bg-[#0a0a0a] dark:border-[hsl(var(--gold))]/20 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-300">
                 <div>
-                    <p className="text-xs uppercase tracking-widest text-[#d4af37]">Estimated Total</p>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground dark:text-[#d4af37] font-bold">Estimated Total</p>
                     <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold font-['Playfair_Display']">${displayTotal}</span>
-                        <span className="text-white/50 text-sm">approx.</span>
+                        <span className="text-4xl font-bold font-['Playfair_Display'] text-[hsl(var(--gold))]">${displayTotal}</span>
+                        <span className="text-muted-foreground text-sm">approx.</span>
                     </div>
                 </div>
                 {!hideButton && (
