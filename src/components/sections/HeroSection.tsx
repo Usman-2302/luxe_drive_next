@@ -153,7 +153,7 @@ export function HeroSection() {
                                 <Button
                                     variant="luxury-gold"
                                     size="xl"
-                                    className="rounded-2xl px-12 h-16 text-lg group shadow-2xl relative overflow-hidden ring-1 ring-white/10"
+                                    className="rounded-2xl px-6 sm:px-12 h-16 text-lg group shadow-2xl relative overflow-hidden ring-1 ring-white/10"
                                     asChild
                                 >
                                     <Link href="/booking">
