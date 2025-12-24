@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -73,6 +73,10 @@ export function HeroSection() {
         };
     }, []);
 
+    const { scrollY } = useScroll();
+    const bgY = useTransform(scrollY, [0, 1000], [0, 400]);
+    const textY = useTransform(scrollY, [0, 1000], [0, 200]);
+
     return (
         <section
             id="booking"
@@ -82,6 +86,7 @@ export function HeroSection() {
             {heroImages.map((img, i) => (
                 <motion.div
                     key={i}
+                    style={{ y: bgY }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: currentBg === i ? 1 : 0 }}
                     transition={{ duration: 1.5 }}
@@ -112,6 +117,7 @@ export function HeroSection() {
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Content Left */}
                     <motion.div
+                        style={{ y: textY }}
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}

@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { FleetSection } from "@/components/sections/FleetSection";
+import { VideoShowcase } from "@/components/sections/VideoShowcase";
 import { BrandedLoader } from "@/components/ui/branded-loader";
 
 const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection").then(mod => mod.TestimonialsSection));
@@ -22,6 +23,7 @@ export default function Home() {
                 <WhyChooseUs />
                 <ServicesSection />
                 <FleetSection />
+                <VideoShowcase />
                 <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><BrandedLoader /></div>}>
                     <TestimonialsSection />
                 </Suspense>
