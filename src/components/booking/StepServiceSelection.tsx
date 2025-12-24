@@ -227,7 +227,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                     size="xl"
                     disabled={!state.serviceId || !state.pickup || !state.destination || !state.date || !state.time}
                     onClick={onNext}
-                    className="w-full sm:w-auto rounded-2xl px-12 group"
+                    className="w-full sm:w-auto rounded-2xl px-4 sm:px-12 group"
                 >
                     Continue to Vehicle Selection
                     <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
