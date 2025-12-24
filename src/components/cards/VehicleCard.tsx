@@ -67,6 +67,7 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
           </motion.div>
 
           {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
           {/* Class Badge */}

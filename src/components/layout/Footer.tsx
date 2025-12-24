@@ -101,7 +101,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-border/60 bg-gradient-to-t from-background via-background/98 to-background/95">
+    <footer className="border-t border-border/60 dark:border-[hsl(var(--gold))]/20 bg-slate-50 dark:bg-none dark:bg-[#050505]">
       {/* Main Footer */}
       <div className="luxury-container py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">

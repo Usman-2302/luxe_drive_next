@@ -72,7 +72,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:bg-gradient-to-b dark:from-[#111111] dark:to-[#0b0b0b]">
             <Navbar />
             <main className="overflow-hidden">
                 {/* Hero Section */}

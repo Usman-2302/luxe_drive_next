@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 export default function BookingPage() {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:bg-[radial-gradient(ellipse_at_center,_#111111_0%,_#0a0a0a_100%)]">
             <Navbar />
             <main className="pt-32 pb-24">
                 <div className="luxury-container">

@@ -76,7 +76,7 @@ export function HeroSection() {
     return (
         <section
             id="booking"
-            className="relative min-h-[85vh] flex items-center pt-12 lg:pt-16 overflow-hidden"
+            className="relative min-h-[85vh] flex items-center pt-12 lg:pt-16 overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100/50 dark:bg-gradient-to-b dark:from-[#0a0a0a] dark:to-[#1a1a1a]"
         >
             {/* Cinematic background carousel */}
             {heroImages.map((img, i) => (
@@ -98,8 +98,9 @@ export function HeroSection() {
                         sizes="100vw"
                         quality={85}
                     />
-                    {/* Theme-aware background overlays for readability */}
+                    {/* Theme-aware background overlays for readability - Forced Dark Theme for Hero */}
                     <div className="absolute inset-0 bg-white/40 dark:bg-black/40" />
+                    <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-[#0a0a0a]/80 dark:via-transparent dark:to-[#1a1a1a]" />
                     <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/50 to-transparent dark:from-black/80 dark:via-black/20 dark:to-transparent" />
                 </motion.div>
             ))}

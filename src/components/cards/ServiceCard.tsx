@@ -25,16 +25,18 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
         <motion.div
           whileHover={{ y: -8 }}
           className={cn(
-            "group relative h-full p-6 rounded-2xl glass card-glow",
-            "border border-border/40 hover:border-[hsl(var(--silver))]/40",
-            "transition-all duration-300"
+            "group relative h-full p-6 rounded-2xl card-glow transition-all duration-300",
+            "glass border border-border/40 hover:border-[hsl(var(--silver))]/40", // Light Theme
+            "dark:glass-none dark:border-white/5 dark:hover:border-white/10", // Dark Theme border
+            index % 2 === 0 ? "bg-white dark:bg-[#0f0f0f]" : "bg-slate-50/50 dark:bg-[#181818]"
           )}
         >
           {/* Icon */}
-          <div className="mb-4">
+          <div className="mb-4 relative">
+            <div className="absolute inset-0 bg-[hsl(var(--gold))]/20 blur-xl opacity-50 rounded-full" />
             <motion.div
               whileHover={{ scale: 1.1 }}
-              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(var(--silver))]/20 to-transparent"
+              className="relative inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(var(--silver))]/10 to-transparent border border-white/5"
             >
               <Icon className="h-7 w-7 text-[hsl(var(--silver))]" />
             </motion.div>
