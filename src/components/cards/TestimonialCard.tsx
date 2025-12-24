@@ -16,7 +16,7 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
     <motion.div
       whileHover={{ y: -4 }}
       className={cn(
-        "p-6 rounded-2xl glass border border-border/50",
+        "p-6 rounded-2xl glass border border-border/50 h-full flex flex-col",
         "hover:border-[hsl(var(--silver))]/30 transition-all duration-300",
         className
       )}
@@ -32,20 +32,21 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
       </div>
 
       {/* Content */}
-      <p className="text-foreground mb-6 leading-relaxed">
+      <p className="text-foreground mb-6 leading-relaxed flex-1">
         "{testimonial.content}"
       </p>
 
       {/* Author */}
       <div className="flex items-center gap-4">
-        <Image
-          src={testimonial.image}
-          alt={testimonial.name}
-          width={48}
-          height={48}
-          className="rounded-full object-cover ring-2 ring-[hsl(var(--silver))]/20"
-          sizes="48px"
-        />
+        <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 ring-2 ring-[hsl(var(--silver))]/20">
+          <Image
+            src={testimonial.image}
+            alt={testimonial.name}
+            fill
+            className="object-cover"
+            sizes="48px"
+          />
+        </div>
         <div>
           <p className="font-semibold">{testimonial.name}</p>
           <p className="text-sm text-muted-foreground">

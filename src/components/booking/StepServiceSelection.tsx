@@ -3,7 +3,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useBooking, ServiceType } from "./BookingContext";
-import { Plane, Hotel, Briefcase, Heart, MapPin, ArrowRight } from "lucide-react";
+import { Plane, Hotel, Briefcase, Heart, MapPin, ArrowRight, CalendarIcon, Clock } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { format } from "date-fns"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +46,29 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
     // We can rely on ServicePricing to calculate, but we need to pass back the total to update context
     // Actually ServicePricing calculates it internally based on props. 
     // We should update the context whenever addons change.
+
+    const generateTimeSlots = (selectedDate: string | undefined): string[] => {
+        const slots: string[] = [];
+        const now = new Date();
+        const isToday = selectedDate === now.toISOString().split('T')[0];
+
+        for (let h = 0; h < 24; h++) {
+            for (let m = 0; m < 60; m += 15) {
+                if (isToday) {
+                    const currH = now.getHours();
+                    const currM = now.getMinutes();
+                    // If time is in the past (roughly), skip. Add buffer if needed.
+                    // Simple check: h must be > current, or same hour and m > current
+                    if (h < currH || (h === currH && m < currM)) continue;
+                }
+                const timeString = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+                slots.push(timeString);
+            }
+        }
+        return slots;
+    };
+
+    const timeSlots = generateTimeSlots(state.date);
 
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4">
@@ -128,24 +155,67 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                             />
                         </div>
                     </div>
+
+
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Date</label>
-                            <input
-                                type="date"
-                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
-                                value={state.date}
-                                onChange={(e) => updateState({ date: e.target.value })}
-                            />
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant={"outline"}
+                                        className={cn(
+                                            "w-full h-12 px-4 text-left font-normal rounded-xl bg-background/50 border-border/40 hover:bg-background/80 hover:border-[hsl(var(--gold))]/50 transition-all",
+                                            !state.date && "text-muted-foreground"
+                                        )}
+                                    >
+                                        {state.date ? (
+                                            format(new Date(state.date.endsWith('Z') ? state.date : state.date + 'T12:00:00'), "PPP")
+                                        ) : (
+                                            <span>Pick a date</span>
+                                        )}
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                    <Calendar
+                                        mode="single"
+                                        selected={state.date ? new Date(state.date.endsWith('Z') ? state.date : state.date + 'T12:00:00') : undefined}
+                                        onSelect={(date) => updateState({ date: date ? format(date, "yyyy-MM-dd") : "" })}
+                                        disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                                        initialFocus
+                                        className="bg-background border-border/40"
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </div>
                         <div className="space-y-2">
                             <label className="text-xs uppercase tracking-widest font-bold text-muted-foreground ml-1">Time</label>
-                            <input
-                                type="time"
-                                className="w-full h-12 px-4 rounded-xl bg-background/50 border border-border/40 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))]/50 transition-all"
+                            <Select
                                 value={state.time}
-                                onChange={(e) => updateState({ time: e.target.value })}
-                            />
+                                onValueChange={(value: string) => updateState({ time: value })}
+                                disabled={!state.date}
+                            >
+                                <SelectTrigger className="w-full h-12 px-4 rounded-xl bg-background/50 border-border/40 hover:bg-background/80 hover:border-[hsl(var(--gold))]/50 transition-all">
+                                    <div className="flex items-center gap-2 w-full">
+                                        <SelectValue placeholder="Select time" />
+                                        <Clock className="ml-auto h-4 w-4 opacity-50" />
+                                    </div>
+                                </SelectTrigger>
+                                <SelectContent className="max-h-[300px] bg-background/95 backdrop-blur-xl border-border/40">
+                                    {timeSlots.length > 0 ? (
+                                        timeSlots.map((time) => (
+                                            <SelectItem key={time} value={time} className="cursor-pointer focus:bg-[hsl(var(--gold))]/10 focus:text-[hsl(var(--gold))]">
+                                                {time}
+                                            </SelectItem>
+                                        ))
+                                    ) : (
+                                        <div className="p-4 text-sm text-center text-muted-foreground">
+                                            No slots available for today
+                                        </div>
+                                    )}
+                                </SelectContent>
+                            </Select>
                         </div>
                     </div>
                 </div>
