@@ -26,9 +26,8 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           whileHover={{ y: -8 }}
           className={cn(
             "group relative h-full p-6 rounded-2xl card-glow transition-all duration-300",
-            "glass border border-border/40 hover:border-[hsl(var(--silver))]/40 hover:shadow-[0_4px_20px_-5px_hsl(var(--silver)/0.25)]", // Light Theme
-            "dark:glass-none dark:border-white/5 dark:hover:border-white/10", // Dark Theme border
-            index % 2 === 0 ? "bg-white dark:bg-[#0f0f0f]" : "bg-slate-50/50 dark:bg-[#181818]"
+            "glass border border-border/40 hover:border-[hsl(var(--silver))]/40 hover:shadow-[0_4px_20px_-5px_hsl(var(--silver)/0.25)]", // Unified Light Theme
+            "dark:bg-white/5 dark:border-white/5 dark:hover:border-white/10" // Unified Dark Theme (removing glass-none to allow consistency or custom dark glass)
           )}
         >
           {/* Icon */}
