@@ -27,6 +27,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
             await createBooking(state);
             setConfirmed();
             setShowSuccess(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             // Persist cleanup after a short delay
             setTimeout(() => {
                 resetState();
@@ -72,7 +73,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
             <div className="grid lg:grid-cols-2 gap-8">
                 {/* Left Col: Selections */}
                 <div className="space-y-6">
-                    <div className="p-8 rounded-[2.5rem] glass border border-border/40 space-y-6">
+                    <div className="p-8 rounded-[2.5rem] glass border border-border/40 space-y-6 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]">
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-2xl bg-[hsl(var(--gold))]/10 border border-[hsl(var(--gold))]/20">
                                 <Car className="h-6 w-6 text-[hsl(var(--gold))]" />
@@ -99,7 +100,7 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
 
                 {/* Right Col: Logistics */}
                 <div className="space-y-6">
-                    <div className="p-8 rounded-[2.5rem] bg-accent/20 border border-border/40 space-y-6 shadow-inner">
+                    <div className="p-8 rounded-[2.5rem] bg-accent/20 border border-border/40 space-y-6 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]">
                         <div className="space-y-4 pb-4 border-b border-border/40">
                             <h4 className="text-sm font-bold font-['Playfair_Display'] text-[hsl(var(--gold))] uppercase tracking-widest">Journey</h4>
                             <div className="grid grid-cols-2 gap-4">
@@ -139,6 +140,31 @@ export function StepSummary({ onPrev }: { onPrev: () => void }) {
                                 </div>
                             )}
                         </div>
+
+                        {/* Pricing Summary */}
+                        {(state.quotedPrice || (state.selectedAddons && state.selectedAddons.length > 0)) && (
+                            <div className="pt-4 border-t border-border/40 space-y-4">
+                                <h4 className="text-sm font-bold font-['Playfair_Display'] text-[hsl(var(--gold))] uppercase tracking-widest">Investment</h4>
+                                {state.selectedAddons && state.selectedAddons.length > 0 && (
+                                    <div className="space-y-2">
+                                        <p className="text-[10px] text-muted-foreground uppercase font-bold">Enhancements</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {state.selectedAddons.map((addon, i) => (
+                                                <span key={i} className="px-2 py-1 rounded-md bg-[hsl(var(--gold))]/10 text-[hsl(var(--gold))] text-xs font-medium border border-[hsl(var(--gold))]/20">
+                                                    {addon}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {state.quotedPrice && (
+                                    <div className="flex justify-between items-end">
+                                        <p className="text-sm text-muted-foreground uppercase font-bold">Estimated Total</p>
+                                        <p className="text-2xl font-bold font-['Playfair_Display'] text-[hsl(var(--gold))]">${state.quotedPrice}</p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

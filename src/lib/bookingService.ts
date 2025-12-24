@@ -24,6 +24,8 @@ export async function createBooking(state: BookingState) {
             phone: state.phone,
             passengers: state.passengers,
             notes: state.notes || '',
+            selectedAddons: state.selectedAddons || [],
+            quotedPrice: state.quotedPrice || 0,
             createdAt: new Date().toISOString(),
             status: 'pending',
         };

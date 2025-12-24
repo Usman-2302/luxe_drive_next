@@ -20,6 +20,8 @@ export interface BookingState {
     passengers: number;
     notes: string;
     isConfirmed: boolean;
+    selectedAddons: string[];
+    quotedPrice?: number;
 }
 
 const initialState: BookingState = {
@@ -38,6 +40,8 @@ const initialState: BookingState = {
     passengers: 1,
     notes: "",
     isConfirmed: false,
+    selectedAddons: [],
+    quotedPrice: undefined,
 };
 
 interface BookingContextType {

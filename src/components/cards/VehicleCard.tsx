@@ -44,7 +44,7 @@ export function VehicleCard({ vehicle, index, onBook }: VehicleCardProps) {
         className={cn(
           "relative overflow-hidden rounded-2xl glass",
           "border border-border/40 hover:border-[hsl(var(--silver))]/40",
-          "transition-all duration-300 card-glow"
+          "transition-all duration-300 card-glow hover:shadow-[0_4px_20px_-5px_hsl(var(--silver)/0.25)]"
         )}
       >
         {/* Image Container */}

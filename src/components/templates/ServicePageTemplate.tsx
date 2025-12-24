@@ -11,6 +11,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ServiceType } from "@/components/booking/BookingContext";
+import { ServiceTimeline } from "@/components/services/ServiceTimeline";
+import { ServiceLuggage } from "@/components/services/ServiceLuggage";
 
 interface ServicePageTemplateProps {
     slug: string;
@@ -155,6 +157,15 @@ export function ServicePageTemplate({ slug }: ServicePageTemplateProps) {
                                     Instant Confirmation Available
                                 </p>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Enhanced Details Section (Timeline, Pricing, Luggage) */}
+                    <div className="mt-24 space-y-24">
+                        <ServiceTimeline steps={service.process} />
+
+                        <div className="mt-12">
+                            <ServiceLuggage luggage={service.luggage} />
                         </div>
                     </div>
                 </section>

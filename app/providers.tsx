@@ -9,6 +9,7 @@ import { useState, useEffect, createContext, useContext, Suspense } from "react"
 import { usePathname, useSearchParams } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import { BrandedLoader } from "@/components/ui/branded-loader";
+import { BookingProvider } from "@/components/booking/BookingContext";
 
 const LoadingContext = createContext({
     isLoading: false,
@@ -96,9 +97,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
             <QueryClientProvider client={queryClient}>
                 <TooltipProvider>
                     <RouteLoaderProvider>
-                        {children}
-                        <Toaster />
-                        <Sonner />
+                        <BookingProvider>
+                            {children}
+                            <Toaster />
+                            <Sonner />
+                        </BookingProvider>
                     </RouteLoaderProvider>
                 </TooltipProvider>
             </QueryClientProvider>

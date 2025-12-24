@@ -36,7 +36,7 @@ export function ChauffeurCard({ chauffeur, index }: ChauffeurCardProps) {
                 className={cn(
                     "relative overflow-hidden rounded-[2.5rem] glass",
                     "border border-border/40 hover:border-[hsl(var(--gold))]/40",
-                    "transition-all duration-500 card-glow h-full flex flex-col"
+                    "transition-all duration-500 card-glow h-full flex flex-col hover:shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]"
                 )}
             >
                 {/* Image Container */}

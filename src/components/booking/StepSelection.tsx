@@ -35,7 +35,7 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                             onClick={() => updateState({ vehicleId: v.id })}
                             className={cn(
                                 "relative group overflow-hidden rounded-[2rem] glass border transition-all cursor-pointer",
-                                state.vehicleId === v.id ? "border-[hsl(var(--gold))] ring-1 ring-[hsl(var(--gold))]/20" : "border-border/40 hover:border-border/60"
+                                state.vehicleId === v.id ? "border-[hsl(var(--gold))] ring-1 ring-[hsl(var(--gold))]/20 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]" : "border-border/40 hover:border-border/60 hover:shadow-[0_4px_20px_-5px_rgba(212,175,55,0.1)]"
                             )}
                         >
                             <Image
@@ -50,7 +50,6 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                                 <p className="font-bold text-base mb-1">{v.name}</p>
                                 <div className="flex items-center gap-4 text-xs text-muted-foreground font-medium">
                                     <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {v.seats} Seats</span>
-                                    <span className="text-[hsl(var(--gold))]">${v.price}/hr</span>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +72,7 @@ export function StepSelection({ onNext, onPrev }: { onNext: () => void, onPrev: 
                             onClick={() => updateState({ chauffeurId: c.id })}
                             className={cn(
                                 "p-4 rounded-[1.5rem] glass border text-center transition-all cursor-pointer",
-                                state.chauffeurId === c.id ? "border-[hsl(var(--gold))] bg-[hsl(var(--gold))]/5" : "border-border/40"
+                                state.chauffeurId === c.id ? "border-[hsl(var(--gold))] bg-[hsl(var(--gold))]/5 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]" : "border-border/40 hover:shadow-[0_4px_20px_-5px_rgba(212,175,55,0.1)]"
                             )}
                         >
                             <div className="relative w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-border/20 shadow-lg">

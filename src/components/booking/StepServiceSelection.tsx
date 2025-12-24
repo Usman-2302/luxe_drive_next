@@ -7,6 +7,9 @@ import { Plane, Hotel, Briefcase, Heart, MapPin, ArrowRight } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { services } from "@/data/services";
+import { ServicePricing } from "@/components/services/ServicePricing";
+
 const SERVICES = [
     { id: "airport", title: "Airport Transfer", icon: Plane, desc: "Punctual arrivals and stress-free terminal transfers." },
     { id: "hotel", title: "Hotel Transfer", icon: Hotel, desc: "Seamless door-to-door service between your stay and destinations." },
@@ -15,15 +18,33 @@ const SERVICES = [
     { id: "tour", title: "City Tours", icon: MapPin, desc: "Explore the city's landmarks in absolute comfort and privacy." },
 ] as const;
 
+const SERVICE_ID_MAP: Record<string, string> = {
+    "airport": "airport-transfers",
+    "hotel": "hotel-transfers",
+    "corporate": "corporate-travel",
+    "wedding": "wedding-services",
+    "tour": "city-tours"
+};
+
 export function StepServiceSelection({ onNext }: { onNext: () => void }) {
     const { state, updateState } = useBooking();
 
     const handleSelect = (id: ServiceType) => {
-        updateState({ serviceId: id });
+        updateState({ serviceId: id, selectedAddons: [] }); // Reset addons on change
     };
 
+    const selectedServiceData = state.serviceId ? services.find(s => s.id === SERVICE_ID_MAP[state.serviceId]) : null;
+
+    // Calculate total for ServicePricing to display correctly if controlled
+    const parsePrice = (p: string) => parseInt(p.replace(/[^0-9]/g, "")) || 0;
+    const basePrice = selectedServiceData ? parsePrice(selectedServiceData.pricing.basePrice) : 0;
+
+    // We can rely on ServicePricing to calculate, but we need to pass back the total to update context
+    // Actually ServicePricing calculates it internally based on props. 
+    // We should update the context whenever addons change.
+
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4">
             <div className="text-center space-y-4">
                 <h2 className="text-3xl font-bold font-['Playfair_Display']">Select Your <span className="text-gradient">Service</span></h2>
                 <p className="text-muted-foreground font-light max-w-xl mx-auto">Choose the nature of your journey to customize your experience.</p>
@@ -39,8 +60,8 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                         className={cn(
                             "p-6 rounded-[2rem] glass border transition-all cursor-pointer group",
                             state.serviceId === s.id
-                                ? "border-[hsl(var(--gold))] bg-[hsl(var(--gold))]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)]"
-                                : "border-border/40 hover:border-[hsl(var(--gold))]/40"
+                                ? "border-[hsl(var(--gold))] bg-[hsl(var(--gold))]/10 shadow-[0_4px_20px_-5px_rgba(212,175,55,0.15)]"
+                                : "border-border/40 hover:border-[hsl(var(--gold))]/40 hover:shadow-[0_4px_20px_-5px_rgba(212,175,55,0.1)]"
                         )}
                     >
                         <div className={cn(
@@ -54,6 +75,32 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                     </motion.div>
                 ))}
             </div>
+
+            {/* Pricing Overview Section */}
+            {selectedServiceData && (
+                <div className="max-w-4xl mx-auto">
+                    <ServicePricing
+                        pricing={selectedServiceData.pricing}
+                        hideButton={true}
+                        selectedAddons={state.selectedAddons || []}
+                        onAddonToggle={(name) => {
+                            const current = state.selectedAddons || [];
+                            const newAddons = current.includes(name)
+                                ? current.filter(n => n !== name)
+                                : [...current, name];
+
+                            // Recalculate total immediately to store in state
+                            const total = basePrice + newAddons.reduce((acc, addonName) => {
+                                const addon = selectedServiceData.pricing.addons.find(a => a.name === addonName);
+                                return acc + (addon ? parsePrice(addon.price) : 0);
+                            }, 0);
+
+                            updateState({ selectedAddons: newAddons, quotedPrice: total });
+                        }}
+                        currentTotal={state.quotedPrice || basePrice} // Ensure we show updated price
+                    />
+                </div>
+            )}
 
             {/* Logistics Form */}
             <div className="max-w-4xl mx-auto space-y-6 pt-8 border-t border-border/40">
@@ -112,7 +159,7 @@ export function StepServiceSelection({ onNext }: { onNext: () => void }) {
                     onClick={onNext}
                     className="w-full sm:w-auto rounded-2xl px-12 group"
                 >
-                    Continue to Selection
+                    Continue to Vehicle Selection
                     <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
             </div>
